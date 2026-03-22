@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import Anthropic from '@anthropic-ai/sdk'
 import OpenAI from 'openai'
-
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
 const openaiClient = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
 const grokClient = new OpenAI({ apiKey: process.env.GROK_API_KEY, baseURL: 'https://api.x.ai/v1' })
@@ -16,15 +13,7 @@ export async function POST(req: NextRequest) {
   try {
     let content = ''
 
-    if (model === 'claude') {
-      const res = await anthropic.messages.create({
-        model: 'claude-sonnet-4-6',
-        max_tokens: 2048,
-        messages,
-      })
-      content = (res.content[0] as { text: string }).text
-
-    } else if (model === 'chatgpt') {
+    if (model === 'chatgpt') {
       const res = await openaiClient.chat.completions.create({
         model: 'gpt-4o',
         messages,

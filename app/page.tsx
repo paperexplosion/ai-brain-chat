@@ -1,11 +1,10 @@
 'use client'
 import { useState, useRef, useEffect } from 'react'
 
-type Model = 'claude' | 'chatgpt' | 'gemini' | 'grok' | 'deepseek'
+type Model = 'chatgpt' | 'gemini' | 'grok' | 'deepseek'
 type Message = { role: 'user' | 'assistant'; content: string; model: Model }
 
 const MODELS: { id: Model; label: string; color: string }[] = [
-  { id: 'claude',    label: 'Claude',    color: '#d97706' },
   { id: 'chatgpt',  label: 'ChatGPT',   color: '#10a37f' },
   { id: 'gemini',   label: 'Gemini',    color: '#4285f4' },
   { id: 'grok',     label: 'Grok',      color: '#e11d48' },
@@ -27,7 +26,7 @@ async function autoSave(model: Model, messages: Message[]) {
 }
 
 export default function Home() {
-  const [model, setModel] = useState<Model>('claude')
+  const [model, setModel] = useState<Model>('chatgpt')
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
